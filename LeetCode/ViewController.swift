@@ -12,8 +12,10 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-//        let str = "pwwkew"
+//        let str = "dvdf"
         let str = "abcabcbb"
+//        let str = "pwwkew"
+//        let str = "au"
         LongestSubstring().lengthOfLongestSubstring(str)
     }
 
@@ -28,29 +30,27 @@ class LongestSubstring {
         
         let arr = Array(s)
         
-        var longestSubstring = ""
-        
         var substring = ""
     
-        for start in arr.indices {
-            
-            for i in start  ..< arr.count {
-                
-                if substring.contains(arr[i]) {
-                    if longestSubstring.count < substring.count {
-                        longestSubstring = substring
-                    }
-                    substring = ""
-                    break
+        var max = 0
+        
+        for current in 0 ..< arr.count {
+            if let s_idx = substring.lastIndex(of: arr[current]) {
+
+                if substring.count > max {
+                    max = substring.count
                 }
-                substring += String(arr[i])
-                
+                let startIdx = substring.index(s_idx, offsetBy: 1)
+                substring = String(substring[startIdx...])
             }
+            
+            substring += String(arr[current])
+            
         }
         
-        if longestSubstring.count < substring.count {
-            longestSubstring = substring
+        if max < substring.count {
+            max = substring.count
         }
-        return longestSubstring.count
+        return max
     }
 }
