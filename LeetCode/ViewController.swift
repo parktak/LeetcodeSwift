@@ -23,22 +23,22 @@ class ViewController: UIViewController {
 
 class LongestSubstring {
     func lengthOfLongestSubstring(_ s: String) -> Int {
-//            pwwkew
+
         if s.isEmpty { return 0 }
         
         let arr = Array(s)
-        var start = 0
+        
         var longestSubstring = ""
         
-        var substring = String(arr[0])
-        while start < arr.count {
-            let startChar = arr[start]
+        var substring = ""
+    
+        for start in arr.indices {
             
-            for i in start + 1 ..< arr.count {
+            for i in start  ..< arr.count {
                 
-                if startChar == arr[i] {
+                if substring.contains(arr[i]) {
                     if longestSubstring.count < substring.count {
-                        longestSubstring = substring                        
+                        longestSubstring = substring
                     }
                     substring = ""
                     break
@@ -46,7 +46,6 @@ class LongestSubstring {
                 substring += String(arr[i])
                 
             }
-            start += 1
         }
         
         if longestSubstring.count < substring.count {
