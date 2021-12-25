@@ -29,26 +29,32 @@ class LongestSubstring {
         
         let arr = Array(s)
         
-        var substring = ""
-    
         var longest = String(arr[0])
-        
-        for current in 0 ..< arr.count {
-            if let s_idx = substring.lastIndex(of: arr[current]) {
-
-                
-//                let startIdx = substring.index(s_idx, offsetBy: 1)
-                let result = String(substring[s_idx...]) + String(arr[current])
-                
-                if result.count > longest.count {
-                    longest = result
-                }
+        var dic = Dictionary<Character, [Int]>()
+        for (i, str) in arr.enumerated() {
+            if dic[str] == nil {
+                dic[str] = [Int]()
             }
-            
-            substring += String(arr[current])
-            
+            dic[str]?.append(i)
         }
         
+        var max = 0
+        var f = 0
+        var l = 0
+        
+        dic.filter { $0.value.count >= 2 }.forEach { item in
+            if let first = item.value.first, let last = item.value.last {
+                if max < last - first {
+                    max = last - first
+                    f = first
+                    l = last
+                }
+            }
+        }
+        let startIndex = s.index(s.startIndex, offsetBy: f)
+        let lastIndex = s.index(s.startIndex, offsetBy: l)
+        
+        longest = String(s[startIndex ... lastIndex])
         return longest
     }
     
