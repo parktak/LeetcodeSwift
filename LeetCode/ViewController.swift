@@ -30,31 +30,34 @@ class LongestSubstring {
         let arr = Array(s)
         
         var longest = String(arr[0])
-        var dic = Dictionary<Character, [Int]>()
-        for (i, str) in arr.enumerated() {
-            if dic[str] == nil {
-                dic[str] = [Int]()
-            }
-            dic[str]?.append(i)
-        }
         
         var max = 0
-        var f = 0
-        var l = 0
+        // ccc
+        // acc
+        // acabb
+        var standard = 0
+        var beforeStr = Character("")
         
-        dic.filter { $0.value.count >= 2 }.forEach { item in
-            if let first = item.value.first, let last = item.value.last {
-                if max < last - first {
-                    max = last - first
-                    f = first
-                    l = last
-                }
-            }
+        var substring = ""
+        
+        var length = 0
+        arr.forEach { str in
+//            if str == beforeStr && arr[standard] == str {
+//                length += 1
+//                if max < length {
+//                    
+//                }
+//            } else if standard == str {
+//                
+//            } else {
+//                length += 1
+//            }
+            
+            beforeStr = str
+            substring += String(str)
         }
-        let startIndex = s.index(s.startIndex, offsetBy: f)
-        let lastIndex = s.index(s.startIndex, offsetBy: l)
         
-        longest = String(s[startIndex ... lastIndex])
+//        longest = String(s[startIndex ... lastIndex])
         return longest
     }
     
